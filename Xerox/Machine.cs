@@ -13,8 +13,9 @@ namespace Xerox
 	{
 		public bool Print(List<Item> Items)
 		{
-			foreach(var item in Item)
-				print(item);
+			foreach (Item item in Items) {
+				Console.WriteLine ("All Items printed" + item.Count ()); 
+			}
 		}
 
 		//Other definitions...
@@ -29,8 +30,9 @@ namespace Xerox
 	{
 		public bool DoStaple(List<Item> Items)
 		{
-			foreach(var item in Items) 
-				Staple(item);
+			foreach (Item item in Items) {
+				Console.WriteLine ("All Items Stapled" + item.Count ()); 
+			}
 		}
 
 		//Other definitions...
@@ -44,8 +46,11 @@ namespace Xerox
 	{
 		public bool DoFax(List<Item> Items)
 		{
-			foreach(var item in Items) 
-				Fax(item);
+
+			// Fax the items.
+			foreach (Item item in Items) {
+				Console.WriteLine ("All Items Faxed" + item.Count ());
+			}
 		}
 
 		//Other definitions...
@@ -60,8 +65,10 @@ namespace Xerox
 	{
 		public bool DoScan(List<Item> Items)
 		{
-			foreach(var item in Items)
-				Scan(item);
+
+			foreach (Item item in Items) {
+				Console.WriteLine ("All Items Scanned" + item.Count ());
+			}
 		}
 
 		//Other definitions...
@@ -76,29 +83,23 @@ namespace Xerox
 	{
 		public bool DoPhotoCopy(List<Item> Items)
 		{
-			foreach(var item in Items)
-				PhotoCopy(item);
+
+			foreach (Item item in Items) {
+				Console.WriteLine ("All Items Photo copied" + item.Count ()); 
+			}
 		}
 
 		//Other definitions...
 	}
 
-	public interface IMachine : IPrinter, IFax, IScan, IPhotoCopy,IStaple
-	{
-		bool print(List<Item> item);
-		bool Dostaple(List<Item> item);
-		bool Dofax(List<Item> item);
-		bool Doscan(List<Item> item);
-		bool DophotoCopy(List<Item> item);
-	}
 
-	class Machine : IMachine
+	class Machine
 	{
-		private IPrinter printer {get;set;}
-		private IFax fax {get;set;}
-		private IScan scan  {get;set;}
-		private IPhotoCopy photoCopy {get;set;}
-		private IStaple staple {get;set;}
+		public IPrinter printer {get;set;}
+		public IFax fax {get;set;}
+		public IScan scan  {get;set;}
+		public IPhotoCopy photoCopy {get;set;}
+		public IStaple staple {get;set;}
 
 		// Notice how the dependencies are injected through constructor (constructor dependency injection)
 		public  Machine(IPrinter printer, IFax fax, IScan scan, IPhotoCopy photoCopy, IStaple staple)
@@ -110,32 +111,6 @@ namespace Xerox
 			this.staple = staple;
 		}
 
-		public bool print(List<Item> item)
-		{ 
-			printer.Print (item);
-		}
-
-		public bool Dostaple(List<Item> item) 
-		{
-		}
-
-		public bool Dofax(List<Item> item) 
-		{
-			// Fax the items.
-			Console.WriteLine("All Items Faxed" + item.Count());
-		}
-
-		public bool Doscan(List<Item> item) 
-		{
-			// Scan the items.
-			Console.WriteLine("All Items Scanned" + item.Count());
-		}
-
-		public bool DophotoCopy(List<Item> item) 
-		{
-			// Xerox the items.
-			Console.WriteLine("All Items Photo copied" + item.Count()); 
-		}
 	}
 }
 
