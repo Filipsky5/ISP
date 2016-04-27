@@ -92,6 +92,14 @@ namespace Xerox
 		//Other definitions...
 	}
 
+	public interface IPrinterScanner : IPrinter, IScan {
+		
+	}
+
+	public interface I : IPrinter, IScan {
+
+	}
+
 
 	class Machine
 	{
@@ -101,7 +109,7 @@ namespace Xerox
 		public IPhotoCopy photoCopy {get;set;}
 		public IStaple staple {get;set;}
 
-		// Notice how the dependencies are injected through constructor (constructor dependency injection)
+		//(constructor dependency injection)
 		public  Machine(IPrinter printer, IFax fax, IScan scan, IPhotoCopy photoCopy, IStaple staple)
 		{
 			this.printer = printer;
